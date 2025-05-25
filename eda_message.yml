@@ -1,7 +1,10 @@
 ---
-- hosts: localhost
+- name: Print message from EDA
+  hosts: localhost
   gather_facts: false
+
   tasks:
     - name: Print EDA message
       debug:
         msg: "{{ eda_message }}"
+
