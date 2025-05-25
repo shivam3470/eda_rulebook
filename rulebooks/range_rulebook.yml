@@ -6,8 +6,8 @@
         limit: 30
 
   rules:
-    - name: Print message when index is 27
-      condition: event.payload.index == 27
+    - name: Print message when value is 27
+      condition: event.payload.value == 27
       action:
         debug:
           msg: "I am learning to write a rulebook as a part of training"
