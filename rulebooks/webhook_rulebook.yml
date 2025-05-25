@@ -1,0 +1,23 @@
+---
+- name: Webhook Message Handler
+  hosts: localhost
+  sources:
+    - ansible.eda.webhook:
+        port: 5229
+
+  rules:
+    - name: Run job template for Howdy message
+      condition: event.payload.message == "Howdy! Ansible EDA"
+      action:
+        run_job_template:
+          name: Print Webhook Message
+          organization: Default
+          job_args:
+            extra_vars:
+              eda_message: "{{ event.payload.message }}"
+
+    - name: Print all other messages
+      condition: event.payload.message is defined and event.payload.message != "Howdy! Ansible EDA"
+      action:
+        debug:
+          msg: "Received other message: {{ event.payload.message }}"
